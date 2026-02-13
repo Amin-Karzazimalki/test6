@@ -1,0 +1,101 @@
+:root {
+  --line-length: 28px;
+  --line-thickness: 2.5px;
+  --line-color: #e0e0ff;
+  --vibration-color: #a78bfa;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  cursor: none !important;
+}
+
+body {
+  height: 100vh;
+  background: #0a0015;
+  color: #f0f0ff;
+  font-family: system-ui, -apple-system, sans-serif;
+  overflow: hidden;
+}
+
+/* Curseur principal */
+.custom-cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  width: 4px;
+  height: 4px;
+}
+
+.cursor-line {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--line-thickness);
+  height: var(--line-length);
+  background: var(--line-color);
+  border-radius: 4px;
+  transform: translate(-50%, -50%) rotate(0deg);
+  transform-origin: center center;
+  box-shadow: 0 0 12px rgba(224, 224, 255, 0.6);
+  transition: height 0.18s ease, background 0.25s ease;
+  will-change: transform;
+}
+
+/* Effet au hover */
+.hover .cursor-line {
+  height: calc(var(--line-length) * 1.9);
+  background: var(--vibration-color);
+  box-shadow: 0 0 24px rgba(167, 139, 250, 0.7);
+  animation: vibrate 0.8s infinite linear;
+}
+
+@keyframes vibrate {
+  0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+  25%  { transform: translate(-50%, -50%) rotate(2.5deg); }
+  50%  { transform: translate(-50%, -50%) rotate(-2deg); }
+  75%  { transform: translate(-50%, -50%) rotate(1.8deg); }
+}
+
+/* Contenu démo */
+.demo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.demo h1 {
+  font-size: 3.8rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.hover-target {
+  font-size: 5.5rem;
+  color: #d0c0ff;
+  text-decoration: none;
+  padding: 1rem 2.5rem;
+  display: inline-block;
+  border: 1px solid rgba(160, 140, 255, 0.3);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.hover-target:hover {
+  color: white;
+  border-color: rgba(167, 139, 250, 0.7);
+  background: rgba(167, 139, 250, 0.08);
+}
+
+/* Désactive sur mobile/tactile */
+@media (hover: none) {
+  .custom-cursor { display: none; }
+  * { cursor: default !important; }
+}
